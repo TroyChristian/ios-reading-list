@@ -10,11 +10,25 @@ import Foundation
 class BookController{
     var books: [Book] = []
     
-    var readingListURL:URL?{
-        var fileManager = FileManager.default
-        var documentsDir = fileManager.urls(for: . documentDirectory, in: .userDomainMask).first
-        return documentsDir?.appendingPathComponent("ReadingList.plist")
+   private var readingListURL:URL?{
+        let fileManager = FileManager.default
+    guard let documentsDir = fileManager.urls(for: . documentDirectory, in: .userDomainMask).first else {return nil}
+        return documentsDir.appendingPathComponent("ReadingList.plist")
         
     
 }
+    func saveToPersistentStore(){
+        var bookListEncoder = PropertyListEncoder() 
+        
+        do {
+            let booksData =  try bookListEncoder.encode(books)
+            guard let fileURL = readingListURL else {return}
+            try booksData.write(to:fileURL)
+        } catch {
+            print("\(error) encoding the file")
+            
+        }
+        
+        
+    }
 }
