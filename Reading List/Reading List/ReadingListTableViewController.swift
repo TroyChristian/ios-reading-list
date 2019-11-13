@@ -8,7 +8,12 @@
 
 import UIKit
 
-class ReadingListTableViewController: UITableViewController {
+class ReadingListTableViewController: UITableViewController, BookTableViewCellDelegate {
+    func toggleHasBeenRead(for cell: BookTableViewCell) {
+        
+        // bookController.book.updateHasBeenRead
+    }
+    
    var bookController = BookController()
    
 

@@ -77,6 +77,24 @@ class BookController{
             }
             
         }
+    
+        func updateBooks(book:Book){
+            guard let bookIndex = books.firstIndex(of:book) else {return}
+            books[bookIndex].hasBeenRead.toggle()
+            saveToPersistentStore() 
+        }
+        
+        func updateReasonOrTitle(book:Book, newTitle:String, newReason:String){
+            
+           guard let bookIndex = books.firstIndex(of:book) else {return}
+            if !newTitle.isEmpty{
+                books[bookIndex].title = newTitle}
+            
+            if !newReason.isEmpty{
+                books[bookIndex].title = newReason}
+            }
+            
+        
         
     }
     

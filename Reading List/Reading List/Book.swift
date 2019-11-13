@@ -21,24 +21,10 @@ struct Book: Equatable, Codable {
         self.hasBeenRead = hasBeenRead
         
     }
-    mutating func updateHasBeenRead(){
-       hasBeenRead = !hasBeenRead
-        bookController.saveToPersistentStore()
-        
     
-        
-}
+
+        }
     
-    mutating func updateReasonOrTitle(newTitle:String = "", reason:String = ""){
-        if !newTitle.isEmpty {
-            title = newTitle
-            
-        }
-        
-        if !reason.isEmpty{
-            reasonToRead = reason
-        }
-    }
 
 
-}
+
