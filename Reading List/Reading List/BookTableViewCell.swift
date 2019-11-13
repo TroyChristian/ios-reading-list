@@ -14,8 +14,10 @@ class BookTableViewCell: UITableViewCell {
     
     @IBOutlet weak var buttonLabel: UIImageView!
     @IBAction func buttonAction(_ sender: Any) {
+        //delegate?.toggleHasBeenRead(for cell: )
     }
     
+    var delegate: BookTableViewCellDelegate?
     var book:Book?
     
     override func setSelected(_ selected: Bool, animated: Bool) {
