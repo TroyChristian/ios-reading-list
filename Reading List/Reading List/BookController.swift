@@ -9,6 +9,16 @@
 import Foundation
 class BookController{
     var books: [Book] = []
+    var readBooks: [Book] {
+        let read = books.filter{$0.hasBeenRead == true}
+        return read
+    }
+    
+    var unreadBooks: [Book] {
+        let unread = books.filter{$0.hasBeenRead == false}
+        return unread 
+    }
+    
     
    private var readingListURL:URL?{
         let fileManager = FileManager.default

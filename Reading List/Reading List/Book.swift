@@ -8,6 +8,8 @@
 
 import Foundation
 var bookController = BookController()
+
+
 struct Book: Equatable, Codable {
     var title:String
     var reasonToRead:String
