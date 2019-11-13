@@ -25,7 +25,7 @@ class ReadingListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 2
     }
 
@@ -37,7 +37,7 @@ class ReadingListTableViewController: UITableViewController {
         if section == 1 {
             return bookController.unreadBooks.count
         }
-     
+        return 10 
     }
 
     
@@ -46,13 +46,20 @@ class ReadingListTableViewController: UITableViewController {
 
         let book = bookFor(indexPath: indexPath)
 
-        cell.book = book
+        cell.textLabel?.text = book.title
+        return cell
         
         
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        <#code#>
+        if section == 0 {
+            return "Read Books"
+        } else {
+            return "Unread Books"
+        }
+        
+        
     }
     
     private func bookFor(indexPath: IndexPath) -> Book {

@@ -8,7 +8,7 @@
 
 import Foundation
 class BookController{
-    var books: [Book] = []
+    var books: [Book] = [Book(title:"MobyDickTest",reasonToRead: "test", hasBeenRead: true), Book(title:"HP", reasonToRead: "none", hasBeenRead: false)]
     var readBooks: [Book] {
         let read = books.filter{$0.hasBeenRead == true}
         return read

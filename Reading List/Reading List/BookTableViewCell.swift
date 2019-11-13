@@ -14,7 +14,7 @@ class BookTableViewCell: UITableViewCell {
     
     @IBOutlet weak var buttonLabel: UIImageView!
     @IBAction func buttonAction(_ sender: Any) {
-        //delegate?.toggleHasBeenRead(for cell: )
+        //delegate?.toggleHasBeenRead(forcell: )
     }
     
     var delegate: BookTableViewCellDelegate?
