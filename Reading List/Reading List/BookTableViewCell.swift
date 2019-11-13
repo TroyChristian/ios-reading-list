@@ -12,14 +12,31 @@ class BookTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var buttonLabel: UIButton!
+    @IBOutlet weak var buttonLabel: UIImageView!
     @IBAction func buttonAction(_ sender: Any) {
     }
+    
+    var book:Book?
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
+    
+    func updateViews() {
+        guard let newLabel = book?.title else {return}
+        titleLabel.text? = newLabel
+        
+        
+        guard let checked = book?.hasBeenRead else {return}
+        if checked {buttonLabel.image = #imageLiteral(resourceName: "checked")}
+        
+        if checked == false{ buttonLabel.image = #imageLiteral(resourceName: "unchecked")}
+        
+        
+       
+        }
 
 }
+
