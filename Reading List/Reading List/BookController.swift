@@ -18,7 +18,7 @@ class BookController{
     
 }
     func saveToPersistentStore(){
-        var bookListEncoder = PropertyListEncoder() 
+        var bookListEncoder = PropertyListEncoder()
         
         do {
             let booksData =  try bookListEncoder.encode(books)
@@ -31,4 +31,43 @@ class BookController{
         
         
     }
+    
+    func loadFromPersistentStore(){
+        let fileManager = FileManager.default
+        
+        guard let fileURL = readingListURL,
+            fileManager.fileExists(atPath: fileURL.path) else {return}
+        do {
+            let  booksData = try Data(contentsOf: fileURL)
+            let decoder = PropertyListDecoder()
+            books = try decoder.decode([Book].self, from: booksData)
+        } catch {
+            print("\(error) encountered when loading books. Refrence loadFromPersistentStore line 36 - 45")
+            
+        }
+    }
+    
+   @discardableResult func Create(newTitle:String, reason:String) -> Book {
+        let newBook = Book(title:newTitle, reasonToRead:reason)
+        books.append(newBook)
+       saveToPersistentStore()
+        return newBook
+     
+        
+     }
+    
+    func Delete(book:Book){
+        let name = book.title
+        for book in books{
+            if book.title == name {
+                if let index = books.index(of: book) {
+                    books.remove(at: index)
+                    saveToPersistentStore()
+                }
+            }
+            
+        }
+        
+    }
+    
 }
