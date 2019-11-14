@@ -123,9 +123,13 @@ class ReadingListTableViewController: UITableViewController, BookTableViewCellDe
         }
         
         if segue.identifier == "showBookDetail" {
-            let vc = segue.destination as? BookDetailViewController
-            vc?.bookController = bookController
-            // pass book from currently selected cell to book prop in BookDetailViewController.
+            guard let vc = segue.destination as? BookDetailViewController,
+                let indexPath = tableView.indexPathForSelectedRow else {return}
+            vc.bookController = bookController
+            vc.book = bookFor(indexPath: indexPath)
+            
+            
+            // pass book from currently selected cell to book prop in BookDetailViewControl
         }
         
         
