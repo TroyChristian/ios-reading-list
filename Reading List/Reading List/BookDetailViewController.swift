@@ -10,10 +10,44 @@ import UIKit
 
 class BookDetailViewController: UIViewController {
     @IBAction func saveButtonAction(_ sender: Any) {
+     
+        
+        if book != nil {
+            updateViews()
+        }
+        
+        if book == nil{
+           guard  let newTitle = titleTextLabel.text,
+            let newReason = reasonTextView.text
+            else { return }
+            bookController?.Create(newTitle:newTitle, reason:newReason)
+        }
     }
     
     @IBOutlet weak var reasonTextView: UITextView!
     @IBOutlet weak var titleTextLabel: UITextField!
+    
+    var bookController:BookController?
+    var book: Book?
+    
+    func updateViews(){
+        if let selectedBook = book{
+        titleTextLabel.text? = selectedBook.title
+        reasonTextView.text? = selectedBook.reasonToRead
+        self.title = book?.title
+        return
+        }
+        
+        self.title = "Add a new book"
+        
+        
+        
+        
+        
+        
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

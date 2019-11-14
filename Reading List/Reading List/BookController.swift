@@ -76,7 +76,7 @@ class BookController{
                 }
             }
             
-        }
+        } }
     
         func updateBooks(book:Book){
             guard let bookIndex = books.firstIndex(of:book) else {return}
@@ -103,5 +103,5 @@ class BookController{
         
         
     
-}
+
 

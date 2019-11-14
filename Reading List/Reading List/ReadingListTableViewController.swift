@@ -10,8 +10,10 @@ import UIKit
 
 class ReadingListTableViewController: UITableViewController, BookTableViewCellDelegate {
     func toggleHasBeenRead(for cell: BookTableViewCell) {
-        
-        // bookController.book.updateHasBeenRead
+        guard let  bookIndex = tableView.indexPath(for: cell) else {return}
+        let book = bookFor(indexPath: bookIndex)
+        bookController.updateBooks(book: book)
+        // bookController.books.updateHasBeenRead
     }
     
    var bookController = BookController()
@@ -48,7 +50,7 @@ class ReadingListTableViewController: UITableViewController, BookTableViewCellDe
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookCell", for: indexPath) as? BookTableViewCell  else {return UITableViewCell()}
-
+        cell.delegate = self
         let book = bookFor(indexPath: indexPath)
 
         cell.textLabel?.text = book.title
@@ -83,7 +85,7 @@ class ReadingListTableViewController: UITableViewController, BookTableViewCellDe
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -93,7 +95,7 @@ class ReadingListTableViewController: UITableViewController, BookTableViewCellDe
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -110,14 +112,26 @@ class ReadingListTableViewController: UITableViewController, BookTableViewCellDe
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddBook"{
+            let vc = segue.destination as? BookDetailViewController
+            vc?.bookController = bookController
+        }
+        
+        if segue.identifier == "showBookDetail" {
+            let vc = segue.destination as? BookDetailViewController
+            vc?.bookController = bookController
+            // pass book from currently selected cell to book prop in BookDetailViewController.
+        }
+        
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
